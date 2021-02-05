@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="base_material_theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/deep_purple_500</item>
+        <item name="colorSecondary">@color/indigo_500</item>
+        <item name="colorPrimaryVariant">@color/deep_purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/indigo_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorError">@color/red_error</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="android:colorBackground">@color/grey_100</item>
+        <item name="colorOnBackground">@color/white</item>
+    </style>
+</resources>
