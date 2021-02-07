@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/base_material_theme">
-        <activity android:name="com.example.practiceProject.MainActivity">
+        <activity android:name="com.example.practiceProject.view.animation.AnimateFloatingButtonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
