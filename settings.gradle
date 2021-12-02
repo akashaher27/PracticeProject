@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PracticeProject"
 include ':app'
+include ':common'
