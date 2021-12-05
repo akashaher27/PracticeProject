@@ -6,5 +6,5 @@ import retrofit2.Call
 
 interface RecipeInteractor {
 
-    fun getRecipe(): Call<RecipeDomainModel>
+    fun getRecipe(): Call<RecipeRemoteModel>
 }
