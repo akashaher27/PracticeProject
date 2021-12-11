@@ -1,9 +1,8 @@
-package com.example.baseproject.presenter
-
-import com.example.baseproject.presenter.BaseViewModel
+package com.example.practiceproject.presenter
 
 /**
  * Created by akash on 27,04,2021
  */
-open class PostLoginViewModel(): BaseViewModel() {
+open class PostLoginViewModel() : BaseViewModel() {
+
 }

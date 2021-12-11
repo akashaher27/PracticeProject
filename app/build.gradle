@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
 }
 
@@ -40,18 +41,25 @@ dependencies {
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     //retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation deps.Retrofit
+    implementation deps.Okhttp
 
     //hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation deps.Hilt
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+
+    //rxjava
+    implementation  deps.Rxandroid
+    implementation  deps.Rxjava
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

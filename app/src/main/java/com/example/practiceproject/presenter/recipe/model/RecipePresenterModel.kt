@@ -1,6 +1,6 @@
-package com.example.practiceproject.remote.recipe.model
+package com.example.practiceproject.presenter.recipe.model
 
-data class RecipeRemoteModel(
+data class RecipePresenterModel(
     var results: List<RecipeDetail>?
 )
 
