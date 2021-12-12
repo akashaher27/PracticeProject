@@ -2,6 +2,11 @@ package com.example.practiceproject.presenter.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.network.Error
+import com.example.network.Loading
+import com.example.network.Response
+import com.example.network.Success
+import com.example.practiceproject.app.rxjava.RxDisposableSingleObserver
 import com.example.practiceproject.presenter.PostLoginViewModel
 import com.example.practiceproject.domain.recipe.RecipeInteractor
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
@@ -22,9 +27,10 @@ class RecipeViewModel @Inject constructor(
     var mapper: RecipeMapper
 ) : PostLoginViewModel() {
 
-    private val recipeLiveData = MutableLiveData<RecipePresenterModel>()
-    fun getRecipe(): LiveData<RecipePresenterModel> = recipeLiveData
+    private val recipeLiveData = MutableLiveData<Response<RecipePresenterModel>>()
+    fun getRecipe(): LiveData<Response<RecipePresenterModel>> = recipeLiveData
     fun fetchRecipe() {
+        recipeLiveData.value = Loading()
         val dispose = recipeInteractor.getRecipe()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -35,19 +41,15 @@ class RecipeViewModel @Inject constructor(
 
         addDisposable(dispose)
     }
-    inner class FetchRecipeSubscriber() : DisposableSingleObserver<RecipePresenterModel>() {
-        override fun onSuccess(t: RecipePresenterModel?) {
-            t?.let {
-                recipeLiveData.value = it
-            }
+
+    inner class FetchRecipeSubscriber : RxDisposableSingleObserver<RecipePresenterModel>() {
+        override fun success(t: RecipePresenterModel) {
+            recipeLiveData.value = Success(t)
         }
 
-        override fun onError(e: Throwable?) {
-
+        override fun error(e: Throwable) {
+            recipeLiveData.value = Error(e.message)
         }
     }
-
-
-
-
 }
+
