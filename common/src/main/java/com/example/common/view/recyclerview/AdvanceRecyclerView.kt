@@ -29,7 +29,7 @@ class AdvanceRecyclerView : FrameLayout {
     fun initRecyclerView(callback: (recyclerView: CustomRecyclerView) -> Unit) {
         recyclerView.adapter?.unregisterAdapterDataObserver(mDataObserver)
         callback(recyclerView)
-        updateErrorView()
+       // updateErrorView()
         recyclerView.adapter?.registerAdapterDataObserver(mDataObserver)
     }
 

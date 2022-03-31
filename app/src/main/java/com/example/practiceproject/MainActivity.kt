@@ -4,21 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.example.network.Error
-import com.example.network.Loading
-import com.example.network.Response
-import com.example.network.Success
+import androidx.lifecycle.Observer
 import com.example.practiceproject.presenter.recipe.RecipeViewModel
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.core.SingleObserver
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.functions.Function
-import io.reactivex.rxjava3.functions.Function3
 import io.reactivex.rxjava3.observers.DisposableObserver
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 
@@ -31,7 +23,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        checkOnErrorResumeOperator()
+        makeNetworkCall()
+        setupObserver()
+    }
+
+    private fun setupObserver() {
+        viewModel.getRecipe().observe(this, Observer {
+            Log.d(TAG, "setupObserver: ")
+        })
+    }
+
+    private fun makeNetworkCall(){
+        viewModel.fetchRecipe()
     }
 
     private fun checkFlatMapOperator() {

@@ -10,7 +10,7 @@ class RecipeApiImp @Inject constructor(private val client: Retrofit) : RecipeApi
 
     override fun getRecipe(): Single<RecipeRemoteModel> {
         return client.create(RecipeService::class.java)
-            .getRecipe("99dd4d7c0cd046f4bc0e220b005534c1", "pasta", 25, 5)
+            .getRecipe("99dd4d7c0cd046f4bc0e220b005534c1", "pasta", 25, 15)
     }
 
     override fun getRecipeByNutrient(): Single<RecipeRemoteModel> {

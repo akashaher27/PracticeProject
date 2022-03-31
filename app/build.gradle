@@ -8,7 +8,6 @@ plugins {
 
 android {
     compileSdk 31
-
     defaultConfig {
         applicationId "com.example.practiceproject"
         minSdk 23
@@ -18,12 +17,14 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    viewBinding {
+        enabled true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -42,6 +43,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.fragment:fragment-ktx:1.1.0'
+    implementation 'androidx.activity:activity-ktx:1.3.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
@@ -57,8 +59,15 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 
     //rxjava
-    implementation  deps.Rxandroid
-    implementation  deps.Rxjava
+    implementation deps.Rxandroid
+    implementation deps.Rxjava
+
+    //progressbar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    //glide
+    implementation deps.Glide
+    kapt  "com.github.bumptech.glide:compiler:${versions.Glide}"
 
 
     testImplementation 'junit:junit:4.+'
