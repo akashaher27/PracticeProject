@@ -2,8 +2,11 @@ package com.example.baseproject.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.common.util.InternetChecker
+import com.example.practiceproject.R
+import com.google.android.material.snackbar.Snackbar
 import kotlin.math.log
 
 /**
@@ -11,15 +14,21 @@ import kotlin.math.log
  */
 abstract class BaseActivity() : AppCompatActivity() {
 
+    private var networkSnackbar: Snackbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InternetChecker(this).observe(this,{
-            when(it){
-                InternetChecker.InternetState.CONNECTED ->{
-                    Log.d("BaseActivity","Connected")
+        InternetChecker(this).observe(this, {
+            when (it) {
+                InternetChecker.InternetState.DISCONNECTED -> {
+                    networkSnackbar = Snackbar.make(
+                        findViewById<View>(android.R.id.content),
+                        getString(R.string.error_msg_currently_you_are_offline),
+                        Snackbar.LENGTH_INDEFINITE
+                    )
+                    networkSnackbar?.show()
                 }
-                InternetChecker.InternetState.DISCONNECTED ->{
-                    Log.d("BaseActivity","disConnected")
+                InternetChecker.InternetState.CONNECTED -> {
+                    networkSnackbar?.dismiss()
                 }
             }
         })

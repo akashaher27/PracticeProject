@@ -13,4 +13,7 @@
     <!--bottom sheet title-->
     <string name="bottomSheet_title_upload">Upload</string>
 
+    <!-- error string -->
+    <string name="error_msg_currently_you_are_offline">Currently you are offline</string>
+
 </resources>
