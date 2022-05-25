@@ -23,7 +23,8 @@ buildscript {
                 'Okhttp': '4.9.3',
                 'Rxjava':'3.0.0',
                 'Hilt':'2.40',
-                'Glide':'4.13.0'
+                'Glide':'4.13.0',
+                'Room':'2.4.2'
         ]
         deps = [
 
@@ -32,7 +33,8 @@ buildscript {
                 'Rxandroid':"io.reactivex.rxjava3:rxandroid:${versions.Rxjava}",
                 'Rxjava':"io.reactivex.rxjava3:rxjava:${versions.Rxjava}",
                 'Hilt':"com.google.dagger:hilt-android:${versions.Hilt}",
-                'Glide':"com.github.bumptech.glide:glide:${versions.Glide}"
+                'Glide':"com.github.bumptech.glide:glide:${versions.Glide}",
+                'Room':"androidx.room:room-runtime:${versions.Room}"
         ]
     }
 }

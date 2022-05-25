@@ -25,17 +25,14 @@ class RecipeViewModel @Inject constructor(
     fun getRecipe(): LiveData<Response<RecipePresenterModel>> = recipeLiveData
     fun fetchRecipe() {
         recipeLiveData.value = Loading()
-        val dispose = recipeInteractor.getRecipe()
+        addDisposable(recipeInteractor.getRecipe()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .map {
                 mapper.map(it)
             }
-            .subscribeWith(FetchRecipeSubscriber())
-
-        addDisposable(dispose)
+            .subscribe({},{}))
     }
-
     inner class FetchRecipeSubscriber : RxDisposableSingleObserver<RecipePresenterModel>() {
         override fun success(t: RecipePresenterModel) {
             recipeLiveData.value = Success(t)
@@ -51,15 +48,14 @@ class RecipeViewModel @Inject constructor(
     fun getRecipeByNutrients(): LiveData<Response<RecipePresenterModel>> = recipeByNutrientsLiveData
     fun fetchRecipeByNutrients() {
         recipeByNutrientsLiveData.value = Loading()
-        recipeInteractor.getRecipeByNutrients()
+        addDisposable(recipeInteractor.getRecipeByNutrients()
             .map {
                 mapper.map(it)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(FetchRecipeByNutrientsSubscriber())
+            .subscribe({},{}))
     }
-
     inner class FetchRecipeByNutrientsSubscriber() :
         RxDisposableSingleObserver<RecipePresenterModel>() {
         override fun success(t: RecipePresenterModel) {

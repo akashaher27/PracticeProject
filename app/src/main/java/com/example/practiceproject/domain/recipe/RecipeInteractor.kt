@@ -1,11 +1,11 @@
 package com.example.practiceproject.domain.recipe
 
 import com.example.practiceproject.domain.recipe.model.RecipeDomainModel
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.Flowable
 
 interface RecipeInteractor {
 
-    fun getRecipe(): Single<RecipeDomainModel>
+    fun getRecipe(): Flowable<RecipeDomainModel>
 
-    fun getRecipeByNutrients(): Single<RecipeDomainModel>
+    fun getRecipeByNutrients(): Flowable<RecipeDomainModel>
 }

@@ -8,11 +8,17 @@ import androidx.lifecycle.Observer
 import com.example.practiceproject.presenter.recipe.RecipeViewModel
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.functions.Function
+import io.reactivex.rxjava3.internal.operators.flowable.FlowableFlatMap
 import io.reactivex.rxjava3.observers.DisposableObserver
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
+import kotlinx.coroutines.flow.Flow
+import org.reactivestreams.Publisher
+import org.reactivestreams.Subscription
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,17 +29,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        makeNetworkCall()
-        setupObserver()
+
+
+        val flowableObserver = Flowable.just(1,2,3,4,5)
+        val dispose = flowableObserver.subscribe({
+            Log.d(TAG, "onCreate:$it ")
+        }, {
+            Log.d(TAG, "onCreate: error")
+        },{
+            Log.d(TAG, "onCreate: complete")
+        })
+
+        Log.d(TAG, "onCreate: ${dispose.isDisposed}")
+
     }
 
     private fun setupObserver() {
-        viewModel.getRecipe().observe(this, Observer {
+        viewModel.getRecipe().observe(this,  {
             Log.d(TAG, "setupObserver: ")
         })
     }
 
-    private fun makeNetworkCall(){
+    fun makeNetworkCall() {
         viewModel.fetchRecipe()
     }
 
@@ -94,11 +111,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkZipOperator() {
-        val single1 = Single.just(1)
-        val single2 = Single.just(2)
-        val single3 = Single.just(3)
+        val single1 = Flowable.just(1)
+        val single2 = Flowable.just(2)
+        val single3 = Flowable.just(3)
 
-        val single = Single.zip(
+        val single = Flowable.zip(
             single1,
             single2,
             single3,
@@ -115,9 +132,7 @@ class MainActivity : AppCompatActivity() {
             })
 
         single
-            .onErrorResumeNext(Function<Throwable, Single<MutableList<Int>>> {
-                Single.just(mutableListOf(1, 2, 3))
-            })
+            .onErrorResumeNext { Flowable.just(mutableListOf(1, 2, 3)) }
             .subscribe({
                 Log.d(TAG, "checkZipOperator: $it")
             }, {
@@ -141,6 +156,5 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "checkOnErrorResumeOperator: $it")
             })
     }
-
 
 }

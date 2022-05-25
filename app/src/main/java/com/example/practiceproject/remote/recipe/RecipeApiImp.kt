@@ -2,6 +2,7 @@ package com.example.practiceproject.remote.recipe
 
 import com.example.practiceproject.remote.recipe.model.RecipeRemoteModel
 import com.example.practiceproject.remote.recipe.service.RecipeService
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
 import javax.inject.Inject

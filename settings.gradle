@@ -10,3 +10,4 @@ rootProject.name = "PracticeProject"
 include ':app'
 include ':common'
 include ':network'
+include ':room'
