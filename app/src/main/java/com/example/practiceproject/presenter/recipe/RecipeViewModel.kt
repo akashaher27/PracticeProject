@@ -7,6 +7,7 @@ import com.example.network.Loading
 import com.example.network.Response
 import com.example.network.Success
 import com.example.practiceproject.app.rxjava.RxDisposableSingleObserver
+import com.example.practiceproject.app.sharedPref.UserStore
 import com.example.practiceproject.presenter.PostLoginViewModel
 import com.example.practiceproject.domain.recipe.RecipeInteractor
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val recipeInteractor: RecipeInteractor,
-    private val mapper: RecipeMapper
+    private val mapper: RecipeMapper,
+    private val userStore: UserStore
 ) : PostLoginViewModel() {
 
     private val recipeLiveData = MutableLiveData<Response<RecipePresenterModel>>()
@@ -31,8 +33,10 @@ class RecipeViewModel @Inject constructor(
             .map {
                 mapper.map(it)
             }
-            .subscribe({},{}))
+            .subscribe({}, {})
+        )
     }
+
     inner class FetchRecipeSubscriber : RxDisposableSingleObserver<RecipePresenterModel>() {
         override fun success(t: RecipePresenterModel) {
             recipeLiveData.value = Success(t)
@@ -54,8 +58,10 @@ class RecipeViewModel @Inject constructor(
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe({},{}))
+            .subscribe({}, {})
+        )
     }
+
     inner class FetchRecipeByNutrientsSubscriber() :
         RxDisposableSingleObserver<RecipePresenterModel>() {
         override fun success(t: RecipePresenterModel) {
