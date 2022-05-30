@@ -20,21 +20,24 @@ buildscript {
     ext {
         versions = [
                 'Retrofit': '2.9.0',
-                'Okhttp': '4.9.3',
-                'Rxjava':'3.0.0',
-                'Hilt':'2.40',
-                'Glide':'4.13.0',
-                'Room':'2.4.2'
+                'Okhttp'  : '4.9.3',
+                'Rxjava'  : '3.0.0',
+                'Hilt'    : '2.40',
+                'Glide'   : '4.13.0',
+                'Room'    : '2.4.2'
         ]
         deps = [
 
-                'Retrofit': "com.squareup.retrofit2:retrofit:${versions.Retrofit}",
-                'Okhttp':"com.squareup.okhttp3:okhttp:${versions.Okhttp}",
-                'Rxandroid':"io.reactivex.rxjava3:rxandroid:${versions.Rxjava}",
-                'Rxjava':"io.reactivex.rxjava3:rxjava:${versions.Rxjava}",
-                'Hilt':"com.google.dagger:hilt-android:${versions.Hilt}",
-                'Glide':"com.github.bumptech.glide:glide:${versions.Glide}",
-                'Room':"androidx.room:room-runtime:${versions.Room}"
+                'Retrofit'     : "com.squareup.retrofit2:retrofit:${versions.Retrofit}",
+                'Okhttp'       : "com.squareup.okhttp3:okhttp:${versions.Okhttp}",
+                'Rxandroid'    : "io.reactivex.rxjava3:rxandroid:${versions.Rxjava}",
+                'Rxjava'       : "io.reactivex.rxjava3:rxjava:${versions.Rxjava}",
+                'Rxjavaadapter': "com.squareup.retrofit2:adapter-rxjava3:${versions.Retrofit}",
+                'Gson'         : "com.squareup.retrofit2:converter-gson:${versions.Retrofit}",
+                'Hilt'         : "com.google.dagger:hilt-android:${versions.Hilt}",
+                'Glide'        : "com.github.bumptech.glide:glide:${versions.Glide}",
+                'Room'         : "androidx.room:room-runtime:${versions.Room}",
+                'Loging'       : "com.squareup.okhttp3:logging-interceptor:${versions.Okhttp}"
         ]
     }
 }

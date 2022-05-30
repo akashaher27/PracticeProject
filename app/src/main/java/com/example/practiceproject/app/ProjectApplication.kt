@@ -2,13 +2,9 @@ package com.example.practiceproject.app
 
 import android.app.Application
 import android.util.Log
-import com.example.network.ACCESS_TOKEN
-import com.example.practiceproject.MainActivity
-import com.example.practiceproject.app.sharedPref.UserStore
+import com.example.practiceproject.remote.retrofit.ACCESS_TOKEN
 import dagger.hilt.android.HiltAndroidApp
-import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
-import java.lang.Exception
 import javax.inject.Inject
 
 

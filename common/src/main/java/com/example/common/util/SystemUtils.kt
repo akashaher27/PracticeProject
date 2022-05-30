@@ -41,3 +41,4 @@ fun getFileDetail(context: Context, uri: Uri): FileDetail {
 fun toMegaByte(byte: Long):Float {
         return (byte/(1024*1024)).toFloat()
 }
+

@@ -38,7 +38,7 @@ android {
 dependencies {
 
     implementation project(':common')
-    implementation project(':network')
+
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -52,6 +52,9 @@ dependencies {
     //retrofit
     implementation deps.Retrofit
     implementation deps.Okhttp
+    implementation deps.Loging
+    implementation deps.Gson
+    implementation deps.Rxjavaadapter
 
     //hilt
     implementation deps.Hilt

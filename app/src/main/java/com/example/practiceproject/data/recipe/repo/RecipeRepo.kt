@@ -1,11 +1,11 @@
 package com.example.practiceproject.data.recipe.repo
 
-import com.example.practiceproject.remote.recipe.model.RecipeRemoteModel
+import com.example.practiceproject.data.recipe.model.RecipeDataModel
 import io.reactivex.rxjava3.core.Flowable
 
 interface RecipeRepo {
 
-    fun getRecipe():Flowable<RecipeRemoteModel>
+    fun getRecipe():Flowable<RecipeDataModel>
 
-    fun getRecipeByNutrients():Flowable<RecipeRemoteModel>
+    fun getRecipeByNutrients():Flowable<RecipeDataModel>
 }

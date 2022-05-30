@@ -2,15 +2,17 @@ package com.example.practiceproject.presenter.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.network.Error
-import com.example.network.Loading
-import com.example.network.Response
-import com.example.network.Success
+import com.example.practiceproject.app.rxjava.RxDisposableFlowableObserver
 import com.example.practiceproject.app.rxjava.RxDisposableSingleObserver
 import com.example.practiceproject.app.sharedPref.UserStore
 import com.example.practiceproject.presenter.PostLoginViewModel
 import com.example.practiceproject.domain.recipe.RecipeInteractor
+import com.example.practiceproject.domain.recipe.model.toRecipePresentationModel
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
+import com.example.practiceproject.remote.retrofit.Loading
+import com.example.practiceproject.remote.retrofit.OnError
+import com.example.practiceproject.remote.retrofit.Response
+import com.example.practiceproject.remote.retrofit.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -19,7 +21,6 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val recipeInteractor: RecipeInteractor,
-    private val mapper: RecipeMapper,
     private val userStore: UserStore
 ) : PostLoginViewModel() {
 
@@ -31,19 +32,21 @@ class RecipeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .map {
-                mapper.map(it)
+                it.toRecipePresentationModel()
             }
-            .subscribe({}, {})
-        )
+            .subscribeWith(FetchRecipeSubscriber()))
     }
 
-    inner class FetchRecipeSubscriber : RxDisposableSingleObserver<RecipePresenterModel>() {
+    inner class FetchRecipeSubscriber : RxDisposableFlowableObserver<RecipePresenterModel>() {
         override fun success(t: RecipePresenterModel) {
             recipeLiveData.value = Success(t)
         }
 
-        override fun error(e: Throwable) {
-            recipeLiveData.value = Error(e.message)
+        override fun error(e: Throwable?) {
+            recipeLiveData.value = OnError(e?.message)
+        }
+
+        override fun complete() {
         }
     }
 
@@ -54,7 +57,6 @@ class RecipeViewModel @Inject constructor(
         recipeByNutrientsLiveData.value = Loading()
         addDisposable(recipeInteractor.getRecipeByNutrients()
             .map {
-                mapper.map(it)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -69,7 +71,8 @@ class RecipeViewModel @Inject constructor(
         }
 
         override fun error(e: Throwable) {
-            recipeByNutrientsLiveData.value = Error(e.message)
+            recipeByNutrientsLiveData.value =
+                OnError(e.message)
         }
 
     }

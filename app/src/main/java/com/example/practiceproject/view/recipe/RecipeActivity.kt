@@ -9,14 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.view.PostLoginActivity
 import com.example.common.view.recyclerview.EmptyErrorView
-import com.example.network.Error
-import com.example.network.Loading
-import com.example.network.Response
-import com.example.network.Success
 import com.example.practiceproject.MainActivity
 import com.example.practiceproject.R
 import com.example.practiceproject.databinding.ActivityRecipeBinding
 import com.example.practiceproject.presenter.recipe.RecipeViewModel
+import com.example.practiceproject.remote.retrofit.Loading
+import com.example.practiceproject.remote.retrofit.OnError
+import com.example.practiceproject.remote.retrofit.Success
 import com.example.practiceproject.view.recipe.adapter.RecipeAdapter
 import com.example.practiceproject.view.recipe.adapter.RecipeModel
 import com.github.ybq.android.spinkit.style.Wave
@@ -78,7 +77,7 @@ class RecipeActivity() : PostLoginActivity() {
                         adapter.addItems(list)
                     }
                 }
-                is Error -> {
+                is OnError -> {
                     SkProgressBar.visibility = View.GONE
                 }
             }

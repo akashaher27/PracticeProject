@@ -1,6 +1,5 @@
 package com.example.practiceproject.app
 
-import com.example.network.NetworkStore
 import com.example.practiceproject.app.sharedPref.SessionStore
 
 class SessionManager(private val sessionStore: SessionStore) {

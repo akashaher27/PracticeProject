@@ -2,7 +2,6 @@ package com.example.practiceproject.app.sharedPref
 
 import android.content.Context
 import androidx.core.content.edit
-import com.example.network.NetworkStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
