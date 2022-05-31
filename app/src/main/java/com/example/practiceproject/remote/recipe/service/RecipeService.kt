@@ -11,7 +11,6 @@ interface RecipeService {
 
     @GET("recipes/complexSearch")
     fun getRecipe(
-        @Query("apiKey") apiKey: String,
         @Query("query") query: String,
         @Query("maxFat") maxFat: Long,
         @Query("number") number: Long
