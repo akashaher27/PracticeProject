@@ -1,11 +1,13 @@
-package com.example.baseproject.view
+package com.example.practiceproject.view
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.common.util.InternetChecker
 import com.example.practiceproject.R
+import com.example.practiceproject.presenter.BaseViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlin.math.log
 
@@ -14,10 +16,11 @@ import kotlin.math.log
  */
 abstract class BaseActivity() : AppCompatActivity() {
 
+    private val viewModel: BaseViewModel by viewModels()
     private var networkSnackbar: Snackbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InternetChecker(this).observe(this, {
+        InternetChecker(this).observe(this) {
             when (it) {
                 InternetChecker.InternetState.DISCONNECTED -> {
                     networkSnackbar = Snackbar.make(
@@ -31,7 +34,14 @@ abstract class BaseActivity() : AppCompatActivity() {
                     networkSnackbar?.dismiss()
                 }
             }
-        })
+        }
+        viewModel.getNetworkError().observe(this) {
+            //add ui component to show error message
+        }
+    }
+
+    fun handleNetworkError() {
+
     }
 
 }

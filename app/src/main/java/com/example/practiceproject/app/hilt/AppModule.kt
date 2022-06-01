@@ -25,13 +25,16 @@ object AppModule {
         @ApplicationContext context: Context,
         okHttpClient: OkHttpClient
     ): retrofit2.Retrofit {
-        return Retrofit.getClient(context, okHttpClient)
+        return Retrofit.getClient(okHttpClient)
     }
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(headerInterceptor: HeaderInterceptor): OkHttpClient {
-        return OkhttpNetClient(headerInterceptor).getClient()
+    fun provideOkHttpClient(
+        headerInterceptor: HeaderInterceptor,
+        errorInterceptor: ErrorInterceptor
+    ): OkHttpClient {
+        return OkhttpNetClient(headerInterceptor, errorInterceptor).getClient()
     }
 
     @Provides

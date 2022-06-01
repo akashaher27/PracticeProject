@@ -37,7 +37,8 @@ class RecipeViewModel @Inject constructor(
             .subscribeWith(FetchRecipeSubscriber()))
     }
 
-    inner class FetchRecipeSubscriber : RxDisposableFlowableObserver<RecipePresenterModel>() {
+    inner class FetchRecipeSubscriber :
+        RxDisposableFlowableObserver<RecipePresenterModel>(uiResolution) {
         override fun success(t: RecipePresenterModel) {
             recipeLiveData.value = Success(t)
         }

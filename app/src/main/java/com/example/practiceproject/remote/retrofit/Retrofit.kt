@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object Retrofit {
 
-    fun getClient(context: Context, okHttpClient: OkHttpClient): Retrofit {
+    fun getClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
