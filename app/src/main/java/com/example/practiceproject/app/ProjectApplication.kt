@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.practiceproject.remote.retrofit.ACCESS_TOKEN
 import dagger.hilt.android.HiltAndroidApp
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
+import leakcanary.LeakCanary
 import javax.inject.Inject
 
 

@@ -72,6 +72,8 @@ dependencies {
     implementation deps.Glide
     kapt  "com.github.bumptech.glide:compiler:${versions.Glide}"
 
+    //leakcanary(only for debug)
+    debugImplementation deps.LeakCanary
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
