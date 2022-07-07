@@ -75,6 +75,11 @@ dependencies {
     //leakcanary(only for debug)
     debugImplementation deps.LeakCanary
 
+    //room
+    implementation deps.Room
+    implementation deps.RxRoom
+    kapt "androidx.room:room-compiler:${versions.Room}"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

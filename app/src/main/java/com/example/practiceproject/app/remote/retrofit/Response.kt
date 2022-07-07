@@ -1,4 +1,4 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
 sealed class Response<T>(val data: T? = null, val errorString: String? = null)
 class Loading<T>() : Response<T>()

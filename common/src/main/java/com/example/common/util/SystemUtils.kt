@@ -1,6 +1,8 @@
 package com.example.common.util
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.core.content.FileProvider
@@ -38,7 +40,13 @@ fun getFileDetail(context: Context, uri: Uri): FileDetail {
     return FileDetail(name, size, uri)
 }
 
-fun toMegaByte(byte: Long):Float {
-        return (byte/(1024*1024)).toFloat()
+fun toMegaByte(byte: Long): Float {
+    return (byte / (1024 * 1024)).toFloat()
+}
+
+fun Context.isInternetConnected(): Boolean {
+    val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkCapabilities = manager.getNetworkCapabilities(manager.activeNetwork)
+    return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
 }
 

@@ -1,6 +1,5 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
 

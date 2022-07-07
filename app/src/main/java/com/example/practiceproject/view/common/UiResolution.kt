@@ -5,7 +5,7 @@ import com.example.practiceproject.app.common.ErrorResolution
 import com.example.practiceproject.app.common.ResolutionType
 import javax.inject.Inject
 
-class UiResolution(private val errorResolution: MutableLiveData<ErrorResolution>) :
+class UiResolution @Inject constructor(private val errorResolution: MutableLiveData<ErrorResolution>) :
     ResolutionByCase() {
 
     override fun noContentFoundException(errorMessage: String) {

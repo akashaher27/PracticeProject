@@ -9,10 +9,10 @@ import com.example.practiceproject.presenter.PostLoginViewModel
 import com.example.practiceproject.domain.recipe.RecipeInteractor
 import com.example.practiceproject.domain.recipe.model.toRecipePresentationModel
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
-import com.example.practiceproject.remote.retrofit.Loading
-import com.example.practiceproject.remote.retrofit.OnError
-import com.example.practiceproject.remote.retrofit.Response
-import com.example.practiceproject.remote.retrofit.Success
+import com.example.practiceproject.app.remote.retrofit.Loading
+import com.example.practiceproject.app.remote.retrofit.OnError
+import com.example.practiceproject.app.remote.retrofit.Response
+import com.example.practiceproject.app.remote.retrofit.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,15 +20,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
-    private val recipeInteractor: RecipeInteractor,
-    private val userStore: UserStore
+    private val recipeInteractor: RecipeInteractor
 ) : PostLoginViewModel() {
 
     private val recipeLiveData = MutableLiveData<Response<RecipePresenterModel>>()
     fun getRecipe(): LiveData<Response<RecipePresenterModel>> = recipeLiveData
-    fun fetchRecipe() {
+    fun fetchRecipe(isNetworkConnected: Boolean) {
+
         recipeLiveData.value = Loading()
-        addDisposable(recipeInteractor.getRecipe()
+        addDisposable(recipeInteractor.getRecipe(isNetworkConnected)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .map {
@@ -56,7 +56,7 @@ class RecipeViewModel @Inject constructor(
     fun getRecipeByNutrients(): LiveData<Response<RecipePresenterModel>> = recipeByNutrientsLiveData
     fun fetchRecipeByNutrients() {
         recipeByNutrientsLiveData.value = Loading()
-        addDisposable(recipeInteractor.getRecipeByNutrients()
+        addDisposable(recipeInteractor.getRecipeByNutrients(true)
             .map {
             }
             .observeOn(AndroidSchedulers.mainThread())

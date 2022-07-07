@@ -1,11 +1,13 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
 
 import com.example.practiceproject.app.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class HeaderInterceptor @Inject constructor(private val sessionManager: SessionManager) :
     Interceptor {
 

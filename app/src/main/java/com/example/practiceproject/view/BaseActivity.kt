@@ -20,8 +20,8 @@ abstract class BaseActivity() : AppCompatActivity() {
     private var networkSnackbar: Snackbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InternetChecker(this).observe(this) {
-            when (it) {
+        InternetChecker(this).observe(this) { internetState ->
+            when (internetState) {
                 InternetChecker.InternetState.DISCONNECTED -> {
                     networkSnackbar = Snackbar.make(
                         findViewById<View>(android.R.id.content),

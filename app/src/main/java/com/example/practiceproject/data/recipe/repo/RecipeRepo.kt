@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Flowable
 
 interface RecipeRepo {
 
-    fun getRecipe():Flowable<RecipeDataModel>
+    fun getRecipe(hasInternet:Boolean):Flowable<RecipeDataModel>
 
-    fun getRecipeByNutrients():Flowable<RecipeDataModel>
+    fun getRecipeByNutrients(hasInternet:Boolean):Flowable<RecipeDataModel>
 }

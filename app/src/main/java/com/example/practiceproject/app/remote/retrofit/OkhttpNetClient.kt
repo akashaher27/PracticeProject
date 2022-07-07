@@ -1,12 +1,12 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class OkhttpNetClient @Inject constructor(
-    private val headerInterceptor: HeaderInterceptor,
-    private val errorInterceptor: ErrorInterceptor
+class OkhttpNetClient(
+    private val headerInterceptor: HeaderInterceptor, private val errorInterceptor: ErrorInterceptor
 ) : OkHttpClient() {
 
     fun getClient(): OkHttpClient {

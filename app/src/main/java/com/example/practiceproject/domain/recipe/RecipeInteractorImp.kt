@@ -6,17 +6,14 @@ import com.example.practiceproject.domain.recipe.model.RecipeDomainModel
 import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
-class RecipeInteractorImp @Inject constructor(var repo: RecipeRepo, var mapper: RecipeMapper) :
+class RecipeInteractorImp @Inject constructor(var repo: RecipeRepo) :
     RecipeInteractor {
 
-    override fun getRecipe(): Flowable<RecipeDomainModel> {
-        return repo.getRecipe().map {it.toRecipeDomainModel() }
+    override fun getRecipe(hasInternet: Boolean): Flowable<RecipeDomainModel> {
+        return repo.getRecipe(hasInternet).map { it.toRecipeDomainModel() }
     }
 
-    override fun getRecipeByNutrients(): Flowable<RecipeDomainModel> {
-        return repo.getRecipeByNutrients().map {
-            mapper.map(it)
-        }
+    override fun getRecipeByNutrients(hasInternet: Boolean): Flowable<RecipeDomainModel> {
+        return Flowable.never()
     }
-
 }

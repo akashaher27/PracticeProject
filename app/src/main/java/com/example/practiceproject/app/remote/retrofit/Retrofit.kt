@@ -1,12 +1,9 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
-import android.content.Context
-import com.example.practiceproject.app.SessionManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 object Retrofit {
 

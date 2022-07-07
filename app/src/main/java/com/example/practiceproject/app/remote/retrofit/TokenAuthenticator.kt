@@ -1,4 +1,4 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
 import okhttp3.Authenticator
 import okhttp3.Request

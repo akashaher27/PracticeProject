@@ -38,6 +38,7 @@ buildscript {
                 'Hilt'         : "com.google.dagger:hilt-android:${versions.Hilt}",
                 'Glide'        : "com.github.bumptech.glide:glide:${versions.Glide}",
                 'Room'         : "androidx.room:room-runtime:${versions.Room}",
+                'RxRoom'       : "androidx.room:room-rxjava3:${versions.Room}",
                 'Loging'       : "com.squareup.okhttp3:logging-interceptor:${versions.Okhttp}",
                 'LeakCanary'   : "com.squareup.leakcanary:leakcanary-android:${versions.LeakCanary}"
         ]

@@ -1,4 +1,4 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
 
 const val BASE_URL = "https://api.spoonacular.com/"

@@ -1,4 +1,4 @@
-package com.example.practiceproject.remote.retrofit
+package com.example.practiceproject.app.remote.retrofit
 
 import android.content.Context
 import com.example.practiceproject.R

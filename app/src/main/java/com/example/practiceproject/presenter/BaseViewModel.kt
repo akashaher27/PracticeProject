@@ -3,6 +3,7 @@ package com.example.practiceproject.presenter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.common.util.InternetChecker
 import com.example.practiceproject.app.common.ErrorResolution
 import com.example.practiceproject.view.common.UiResolution
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +23,7 @@ open class BaseViewModel() : ViewModel() {
     }
 
     fun getNetworkError(): LiveData<ErrorResolution> = errorResolution
+
 
     protected fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
