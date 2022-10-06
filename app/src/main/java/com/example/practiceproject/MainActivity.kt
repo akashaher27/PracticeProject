@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, "onCreate: added test log")
         Log.d(TAG, "onCreate: added tst log 2")
+        Log.d(TAG, "onCreate: added test log 3")
         val flowableObserver = Flowable.just(1,2,3,4,5)
         val dispose = flowableObserver.subscribe({
             Log.d(TAG, "onCreate:$it ")
