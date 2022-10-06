@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "onCreate: added test log")
+        Log.d(TAG, "onCreate: added tst log 2")
         val flowableObserver = Flowable.just(1,2,3,4,5)
         val dispose = flowableObserver.subscribe({
             Log.d(TAG, "onCreate:$it ")
