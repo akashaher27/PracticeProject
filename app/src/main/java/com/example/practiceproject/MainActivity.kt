@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d(TAG, "onCreate: test log")
 
         val flowableObserver = Flowable.just(1,2,3,4,5)
         val dispose = flowableObserver.subscribe({
