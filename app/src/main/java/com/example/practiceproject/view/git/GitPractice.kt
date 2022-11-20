@@ -10,9 +10,6 @@ internal class GitPractice() : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: Rebase testing")
-        Log.d(TAG, "onCreate: Rebase testing 1")
-        Log.d(TAG, "onCreate: Rebase testing 2")
-        Log.d(TAG, "onCreate: Rebase testing 4")
+        Log.d(TAG, "onCreate: Reset rebase testing")
     }
 }
