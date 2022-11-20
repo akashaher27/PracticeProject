@@ -12,5 +12,6 @@ internal class GitPractice() : BaseActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: Rebase testing")
         Log.d(TAG, "onCreate: Rebase testing 1")
+        Log.d(TAG, "onCreate: Rebase testing 2")
     }
 }
