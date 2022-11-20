@@ -12,5 +12,6 @@ class Git() : BaseActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: git test 1")
         Log.d(TAG, "onCreate: git test 2")
+        Log.d(TAG, "onCreate: git test 3")
     }
 }
