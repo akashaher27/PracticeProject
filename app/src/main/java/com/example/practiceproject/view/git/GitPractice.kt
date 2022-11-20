@@ -10,7 +10,5 @@ internal class GitPractice() : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.d(TAG, "onCreate: Change 1")
     }
 }
