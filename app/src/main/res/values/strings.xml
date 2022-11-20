@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PracticeProject</string>
+
+    <!-- network error -->
+    <string name="message_NoContentFoundException">No content found</string>
+    <string name="message_ResourceNotFoundException">Invalid Request.Check with url or params used while making call</string>
+    <string name="message_InvalidUploadFormatException">Invalid upload format.</string>
+    <string name="message_InternalServerException">Oops..Server is not responding in this moment.Please try again..</string>
+    <string name="message_AuthorizationFailureException">Invalid token.You are not an authorized user.</string>
 </resources>

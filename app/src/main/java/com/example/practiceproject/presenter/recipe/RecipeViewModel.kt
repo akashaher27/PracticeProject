@@ -2,52 +2,80 @@ package com.example.practiceproject.presenter.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.practiceproject.app.rxjava.RxDisposableFlowableObserver
+import com.example.practiceproject.app.rxjava.RxDisposableSingleObserver
+import com.example.practiceproject.app.sharedPref.UserStore
 import com.example.practiceproject.presenter.PostLoginViewModel
 import com.example.practiceproject.domain.recipe.RecipeInteractor
+import com.example.practiceproject.domain.recipe.model.toRecipePresentationModel
 import com.example.practiceproject.presenter.recipe.model.RecipePresenterModel
+import com.example.practiceproject.remote.retrofit.Loading
+import com.example.practiceproject.remote.retrofit.OnError
+import com.example.practiceproject.remote.retrofit.Response
+import com.example.practiceproject.remote.retrofit.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.core.SingleObserver
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
-import io.reactivex.rxjava3.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val recipeInteractor: RecipeInteractor,
-    var mapper: RecipeMapper
+    private val userStore: UserStore
 ) : PostLoginViewModel() {
 
-    private val recipeLiveData = MutableLiveData<RecipePresenterModel>()
-    fun getRecipe(): LiveData<RecipePresenterModel> = recipeLiveData
+    private val recipeLiveData = MutableLiveData<Response<RecipePresenterModel>>()
+    fun getRecipe(): LiveData<Response<RecipePresenterModel>> = recipeLiveData
     fun fetchRecipe() {
-        val dispose = recipeInteractor.getRecipe()
+        recipeLiveData.value = Loading()
+        addDisposable(recipeInteractor.getRecipe()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .map {
-                mapper.map(it)
+                it.toRecipePresentationModel()
             }
-            .subscribeWith(FetchRecipeSubscriber())
-
-        addDisposable(dispose)
-    }
-    inner class FetchRecipeSubscriber() : DisposableSingleObserver<RecipePresenterModel>() {
-        override fun onSuccess(t: RecipePresenterModel?) {
-            t?.let {
-                recipeLiveData.value = it
-            }
-        }
-
-        override fun onError(e: Throwable?) {
-
-        }
+            .subscribeWith(FetchRecipeSubscriber()))
     }
 
+    inner class FetchRecipeSubscriber :
+        RxDisposableFlowableObserver<RecipePresenterModel>(uiResolution) {
+        override fun success(t: RecipePresenterModel) {
+            recipeLiveData.value = Success(t)
+        }
+
+        override fun error(e: Throwable?) {
+            recipeLiveData.value = OnError(e?.message)
+        }
+
+        override fun complete() {
+        }
+    }
 
 
+    private var recipeByNutrientsLiveData = MutableLiveData<Response<RecipePresenterModel>>()
+    fun getRecipeByNutrients(): LiveData<Response<RecipePresenterModel>> = recipeByNutrientsLiveData
+    fun fetchRecipeByNutrients() {
+        recipeByNutrientsLiveData.value = Loading()
+        addDisposable(recipeInteractor.getRecipeByNutrients()
+            .map {
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({}, {})
+        )
+    }
 
+    inner class FetchRecipeByNutrientsSubscriber() :
+        RxDisposableSingleObserver<RecipePresenterModel>() {
+        override fun success(t: RecipePresenterModel) {
+            recipeByNutrientsLiveData.value = Success(t)
+        }
+
+        override fun error(e: Throwable) {
+            recipeByNutrientsLiveData.value =
+                OnError(e.message)
+        }
+
+    }
 }
+
