@@ -1,4 +1,4 @@
 package com.example.practiceproject.view.git
 
 
-private const val REBASE_TEST = "3"
+private const val REBASE_TEST = "4"
