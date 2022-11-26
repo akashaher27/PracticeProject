@@ -10,6 +10,6 @@ class Git() : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: git test 1")
+        Log.d(TAG, "onCreate: Reset git Amend")
     }
 }
