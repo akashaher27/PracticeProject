@@ -21,5 +21,6 @@ class Git() : BaseActivity() {
         Log.d(TAG, "onCreate: git test for amend-5")
         Log.d(TAG, "onCreate: git test for amend-6")
         Log.d(TAG, "onCreate: git test for amend-7")
+        Log.d(TAG, "onCreate: git test for amend-7")
     }
 }
